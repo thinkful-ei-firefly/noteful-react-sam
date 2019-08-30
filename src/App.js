@@ -6,7 +6,6 @@ import NoteList from "./components/NoteList";
 import NotePage from "./components/NotePage";
 import NoteSidebar from "./components/NoteSidebar";
 import UserContext from "./components/UserContext";
-import cuid from 'cuid';
 import ErrorPage from './ErrorPage';
 
 import "./App.css";
@@ -20,7 +19,7 @@ class App extends Component {
   };
   
   componentDidMount() {
-    fetch('http://localhost:9090/db')
+    fetch('http://localhost:8080/lists')
       .then(res=> {
         if (!res.ok) {
           throw new Error('Errror: '+res.status)
@@ -30,8 +29,22 @@ class App extends Component {
       .then(res => res.json())
       .then(resJson => {
         this.setState({
-          folders: resJson.folders,
-          notes: resJson.notes,
+          folders: resJson,
+          loading: false
+        })
+      })
+      .catch(error => console.log(error));
+      fetch('http://localhost:8080/notes')
+      .then(res=> {
+        if (!res.ok) {
+          throw new Error('Errror: '+res.status)
+        }
+        return res
+      })
+      .then(res => res.json())
+      .then(resJson => {
+        this.setState({
+          notes: resJson,
           loading: false
         })
       })
@@ -39,7 +52,7 @@ class App extends Component {
   }
 
   handleDelete = (id) => {
-    fetch(`http://localhost:9090/notes/${id}`, {
+    fetch(`http://localhost:8080/notes/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -62,12 +75,11 @@ class App extends Component {
   addFolder = (event) => {
     event.preventDefault();
     const name = event.target.folderAdderInput.value
-    const folder = {
-      id: cuid(),
-      name: name
+    let folder = {
+      list_name: name
     }
     event.target.folderAdderInput.value=''
-    fetch(`http://localhost:9090/folders`, {
+    fetch(`http://localhost:8080/lists`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -89,13 +101,11 @@ class App extends Component {
   addNote = (event) => {
     event.preventDefault();
     const note = {
-      id: cuid(),
-      name: event.target.newNoteName.value,
+      note_name: event.target.newNoteName.value,
       modified: new Date(),
-      folderId: event.target.newNoteFolder.value,
       content: event.target.newNoteContent.value
     }
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`http://localhost:8080/notes/list/${event.target.newNoteFolder.value}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

@@ -37,7 +37,7 @@ class NoteAdder extends React.Component {
   render() {
     const folderOptions= [];
     this.context.folders.forEach(
-        folder=>folderOptions.push(<option key={folder.id} value={folder.id}>{folder.name}</option>)
+        folder=>folderOptions.push(<option key={folder.id} value={folder.id}>{folder.list_name}</option>)
     )
     return (
       <form onSubmit={(e) => this.context.handleAdd(e)}name="NoteAdder">

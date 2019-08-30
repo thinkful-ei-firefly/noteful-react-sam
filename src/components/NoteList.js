@@ -11,11 +11,12 @@ class NoteList extends React.Component {
     let notes
     if (this.context.match.params.folderId) {
       notes = this.context.notes.filter(
-        note => note.folderId === this.context.match.params.folderId
+        note => note.list_id === Number(this.context.match.params.folderId)
       );
     } else {
       notes = this.context.notes;
     }
+    console.log(notes)
     return notes
   }
   
@@ -25,7 +26,7 @@ class NoteList extends React.Component {
       <ul>
         {this.findNotes().map(note => (
           <Note
-            name={note.name}
+            name={note.note_name}
             id={note.id}
             key={note.id}
             modified={note.modified}

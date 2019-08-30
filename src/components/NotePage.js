@@ -7,7 +7,7 @@ import UserContext from './UserContext';
 
   render () {
     const noteArr = this.context.notes.filter(
-      note => note.id === this.context.match.params.notesId
+      note => note.id === Number(this.context.match.params.notesId)
     );
     const note = noteArr[0];
     return !note ? <h2>No note with this ID</h2> :  (

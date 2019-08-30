@@ -11,7 +11,7 @@ class FolderList extends React.Component {
       <div>
         <ul className="folder-list">
           {folders.map(folder => (
-            <Folder name={folder.name} id={folder.id} key={folder.id} />
+            <Folder name={folder.list_name} id={folder.id} key={folder.id} />
           ))}
         </ul>
         <FolderAdder />

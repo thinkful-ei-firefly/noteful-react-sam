@@ -16,7 +16,7 @@ class Note extends React.Component {
           <div className='filler'/>
           <h3>
             <Link className="note-list-item__link" to={`/notes/${this.props.id}`}>
-              {this.props.name}
+              {this.props.note_name}
             </Link>
           </h3>
           <button className='delete' onClick={() => this.context.handleDelete(this.props.id)}>Delete</button>
