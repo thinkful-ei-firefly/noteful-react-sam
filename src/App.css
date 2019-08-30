@@ -1,0 +1,23 @@
+.App {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 6rem;
+  width: 35%;
+  background-color: #777777;
+  height: 100vh;
+}
+
+.main {
+  margin-left: 33%;
+  margin-top: 7rem;
+  height: 100vh;
+  padding: 0 3rem;
+}

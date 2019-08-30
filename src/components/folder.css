@@ -1,0 +1,19 @@
+.folder-list {
+  padding: 0;
+
+  margin: 0;
+}
+
+.folder-item {
+  height: 4rem;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.folder-item__link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
