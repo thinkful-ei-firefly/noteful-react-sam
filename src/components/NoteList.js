@@ -16,7 +16,6 @@ class NoteList extends React.Component {
     } else {
       notes = this.context.notes;
     }
-    console.log(notes)
     return notes
   }
   
@@ -26,7 +25,7 @@ class NoteList extends React.Component {
       <ul>
         {this.findNotes().map(note => (
           <Note
-            name={note.note_name}
+            note_name={note.note_name}
             id={note.id}
             key={note.id}
             modified={note.modified}
