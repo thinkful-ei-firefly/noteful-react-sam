@@ -100,12 +100,14 @@ class App extends Component {
 
   addNote = (event) => {
     event.preventDefault();
+    console.log('adding')
     const note = {
       note_name: event.target.newNoteName.value,
       modified: new Date(),
       content: event.target.newNoteContent.value
     }
-    fetch(`http://localhost:8080/notes/list/${event.target.newNoteFolder.value}`, {
+    const list_id = event.target.newNoteFolder.value
+    fetch(`http://localhost:8080/notes/list/${list_id}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -119,6 +121,7 @@ class App extends Component {
         return res
       })
       .then(() => {
+        note.list_id = list_id
         this.setState({notes: [...this.state.notes, note]})
       })
       .catch(error => console.log(error));

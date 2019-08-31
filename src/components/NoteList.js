@@ -8,10 +8,11 @@ class NoteList extends React.Component {
   static contextType = UserContext;
   
   findNotes = () => {
+    console.log('finding notes')
     let notes
     if (this.context.match.params.folderId) {
       notes = this.context.notes.filter(
-        note => note.list_id === Number(this.context.match.params.folderId)
+        note => Number(note.list_id) === Number(this.context.match.params.folderId)
       );
     } else {
       notes = this.context.notes;
@@ -20,6 +21,7 @@ class NoteList extends React.Component {
   }
   
   render () {
+    console.log('rendering notelist')
     return (
       <div>
       <ul>
