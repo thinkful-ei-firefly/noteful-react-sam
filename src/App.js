@@ -17,9 +17,11 @@ class App extends Component {
     notes: [],
     loading: true,
   };
+
+  url = 'https://mighty-inlet-61201.herokuapp.com'
   
   componentDidMount() {
-    fetch('http://localhost:8080/lists')
+    fetch(this.url+'/lists')
       .then(res=> {
         if (!res.ok) {
           throw new Error('Errror: '+res.status)
@@ -34,7 +36,7 @@ class App extends Component {
         })
       })
       .catch(error => console.log(error));
-      fetch('http://localhost:8080/notes')
+      fetch(this.url+'/notes')
       .then(res=> {
         if (!res.ok) {
           throw new Error('Errror: '+res.status)
@@ -52,7 +54,7 @@ class App extends Component {
   }
 
   handleDelete = (id) => {
-    fetch(`http://localhost:8080/notes/${id}`, {
+    fetch(`${this.url}/notes/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -79,7 +81,7 @@ class App extends Component {
       list_name: name
     }
     event.target.folderAdderInput.value=''
-    fetch(`http://localhost:8080/lists`, {
+    fetch(this.url+'/lists', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -107,7 +109,7 @@ class App extends Component {
       content: event.target.newNoteContent.value
     }
     const list_id = event.target.newNoteFolder.value
-    fetch(`http://localhost:8080/notes/list/${list_id}`, {
+    fetch(`${this.url}/notes/list/${list_id}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
